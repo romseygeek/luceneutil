@@ -73,6 +73,7 @@ class TaskParser implements Closeable {
   private final Sort monthDVSort; // Month of the "last modified timestamp", SORTED doc values
   private final Sort dayOfYearSort; // Day of the year of the "last modified timestamp", NUMERIC doc values
   private final Sort lastModSort;
+  private final Sort lastModDescSort;
   private final int topN;
   private final Random random;
   private final boolean doStoredLoads;
@@ -136,6 +137,7 @@ class TaskParser implements Closeable {
     monthDVSort = new Sort(KeywordField.newSortField("month", false, SortedSetSelector.Type.MIN));
     dayOfYearSort = new Sort(IntField.newSortField("dayOfYear", false, SortedNumericSelector.Type.MIN));
     lastModSort = new Sort(LongField.newSortField("lastMod", false, SortedNumericSelector.Type.MIN));
+    lastModDescSort = new Sort(LongField.newSortField("lastMod", true, SortedNumericSelector.Type.MAX));
   }
 
   @Override
@@ -639,6 +641,9 @@ class TaskParser implements Closeable {
           break;
         case "lastmodndvsort":
           sort = lastModSort;
+          break;
+        case "lastmodndvdescsort":
+          sort = lastModDescSort;
           break;
         case "group100":
           group = "group100";
