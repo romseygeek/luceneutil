@@ -363,6 +363,7 @@ public class LineFileDocs implements Closeable {
     final Field idDV;
     final Field date;
     final Field randomLabel;
+    final Field ordinal;
 
     //final NumericDocValuesField dateMSec;
     //final LongField rand;
@@ -451,6 +452,9 @@ public class LineFileDocs implements Closeable {
 
       randomLabel = new StringField("randomLabel", "", Field.Store.NO);
       doc.add(body);
+
+      ordinal = NumericDocValuesField.indexedField("ordinal", 0);
+      doc.add(ordinal);
 
       id = new StringField("id", "", Field.Store.YES);
       doc.add(id);
@@ -580,6 +584,7 @@ public class LineFileDocs implements Closeable {
     String title;
     String body;
     String randomLabel;
+    String ordinal;
     int myID = -1;
 
     if (isBinary) {
@@ -684,8 +689,10 @@ public class LineFileDocs implements Closeable {
         spot4 = line.length();
       }
 
-      body = line.substring(1+spot2, spot3);
+      int spot5 = line.indexOf(SEP, 1 + spot4);
 
+      body = line.substring(1+spot2, spot3);
+      ordinal = line.substring(spot4+1, spot5);
       randomLabel = line.substring(1+spot3, spot4).strip();
 
       title = line.substring(0, spot);
@@ -709,6 +716,7 @@ public class LineFileDocs implements Closeable {
       } else if (doc.byteVectorField != null) {
         doc.byteVectorField.setVectorValue((byte[]) lfd.vector.array());
       }
+      doc.ordinal.setLongValue(Integer.parseInt(ordinal));
     }
 
     if (myID == -1) {
