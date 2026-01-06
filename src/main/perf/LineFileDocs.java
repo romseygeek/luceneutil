@@ -685,15 +685,17 @@ public class LineFileDocs implements Closeable {
                 "Please download an updated version from home.apache.org/~mikemccand");
       }
       spot4 = line.indexOf(SEP, 1 + spot3);
-      if (spot4 == -1) {
-        spot4 = line.length();
-      }
 
       int spot5 = line.indexOf(SEP, 1 + spot4);
+      if (spot5 == -1) {
+          ordinal = line.substring(spot3 + 1, spot4);
+          randomLabel = null;
+      } else {
+          ordinal = line.substring(spot4 + 1, spot5);
+          randomLabel = line.substring(spot3 + 1, spot4);
+      }
 
       body = line.substring(1+spot2, spot3);
-      ordinal = line.substring(spot4+1, spot5);
-      randomLabel = line.substring(1+spot3, spot4).strip();
 
       title = line.substring(0, spot);
 
