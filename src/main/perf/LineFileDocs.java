@@ -685,6 +685,9 @@ public class LineFileDocs implements Closeable {
                 "Please download an updated version from home.apache.org/~mikemccand");
       }
       spot4 = line.indexOf(SEP, 1 + spot3);
+      if (spot4 == -1) {
+          spot4 = line.length();
+      }
 
       int spot5 = line.indexOf(SEP, 1 + spot4);
       if (spot5 == -1) {
@@ -698,6 +701,7 @@ public class LineFileDocs implements Closeable {
       body = line.substring(1+spot2, spot3);
 
       title = line.substring(0, spot);
+      ordinal = line.substring(line.lastIndexOf(SEP));
 
       final String dateString = line.substring(1+spot, spot2);
       doc.date.setStringValue(dateString);

@@ -137,7 +137,7 @@ class TaskParser implements Closeable {
     monthDVSort = new Sort(KeywordField.newSortField("month", false, SortedSetSelector.Type.MIN));
     dayOfYearSort = new Sort(IntField.newSortField("dayOfYear", false, SortedNumericSelector.Type.MIN));
     lastModSort = new Sort(LongField.newSortField("lastMod", false, SortedNumericSelector.Type.MIN));
-    lastModDescSort = new Sort(LongField.newSortField("lastMod", true, SortedNumericSelector.Type.MAX));
+    lastModDescSort = new Sort(LongField.newSortField("ordinal", true, SortedNumericSelector.Type.MAX));
   }
 
   @Override

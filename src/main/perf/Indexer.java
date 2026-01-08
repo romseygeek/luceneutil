@@ -50,6 +50,7 @@ import org.apache.lucene.codecs.lucene99.Lucene99HnswVectorsFormat;
 import org.apache.lucene.codecs.lucene104.Lucene104Codec;
 import org.apache.lucene.codecs.lucene104.Lucene104HnswScalarQuantizedVectorsFormat;
 import org.apache.lucene.codecs.lucene104.Lucene104ScalarQuantizedVectorsFormat.ScalarEncoding;
+import org.apache.lucene.document.LongField;
 import org.apache.lucene.facet.FacetsConfig;
 import org.apache.lucene.facet.taxonomy.TaxonomyWriter;
 import org.apache.lucene.facet.taxonomy.directory.DirectoryTaxonomyWriter;
@@ -75,6 +76,7 @@ import org.apache.lucene.misc.index.BpVectorReorderer;
 import org.apache.lucene.misc.index.BPReorderingMergePolicy;
 import org.apache.lucene.search.Sort;
 import org.apache.lucene.search.SortField;
+import org.apache.lucene.search.SortedNumericSelector;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.util.NamedThreadFactory;
 import org.apache.lucene.util.PrintStreamInfoStream;
@@ -509,6 +511,9 @@ public final class Indexer {
         final IndexWriterConfig iwc = new IndexWriterConfig(a);
 
         if (finalIndexSortField != null) {
+            if ("ordinal".equals(finalIndexSortField)) {
+                iwc.setIndexSort(new Sort(LongField.newSortField("ordinal", false, SortedNumericSelector.Type.MIN)));
+            }
           iwc.setIndexSort(new Sort(new SortField(finalIndexSortField, finalIndexSortType)));
         }
 
