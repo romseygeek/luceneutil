@@ -37,7 +37,7 @@ class PSTopN:
       raise RuntimeError("could not find ps executable in this environment")
     if os.path.exists(log_file_name):
       raise RuntimeError(f"please remove log file {log_file_name} first")
-    self.cmd = f"{PS_EXE_PATH} -eo pid,%cpu,%mem,bsdtime,etime,start,args --cols=120 --sort=-%cpu | head -{top_n} >> {log_file_name} 2>&1"
+    self.cmd = f"{PS_EXE_PATH} -eo pid,%cpu,%mem,etime,start,args | head -{top_n} >> {log_file_name} 2>&1"
     self.stop_now = False
     self.poll_interval_sec = poll_interval_sec
     self.wakey_wakey = threading.Condition()

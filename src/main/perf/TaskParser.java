@@ -136,7 +136,7 @@ class TaskParser implements Closeable {
     titleBDVSort = new Sort(new SortField("titleBDV", SortField.Type.STRING_VAL));
     monthDVSort = new Sort(KeywordField.newSortField("month", false, SortedSetSelector.Type.MIN));
     dayOfYearSort = new Sort(IntField.newSortField("dayOfYear", false, SortedNumericSelector.Type.MIN));
-    lastModSort = new Sort(LongField.newSortField("lastMod", false, SortedNumericSelector.Type.MIN));
+    lastModSort = new Sort(LongField.newSortField("ordinal", false, SortedNumericSelector.Type.MAX));
     lastModDescSort = new Sort(LongField.newSortField("ordinal", true, SortedNumericSelector.Type.MAX));
   }
 
@@ -642,7 +642,7 @@ class TaskParser implements Closeable {
         case "lastmodndvsort":
           sort = lastModSort;
           break;
-        case "lastmodndvdescsort":
+        case "lastmodndvsortdesc":
           sort = lastModDescSort;
           break;
         case "group100":

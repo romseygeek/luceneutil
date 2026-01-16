@@ -1,0 +1,21 @@
+TermDateTimeSort: lastmodndvsort//0 # freq=708472
+TermDateTimeSort: lastmodndvsort//names # freq=402762
+TermDateTimeSort: lastmodndvsort//nbsp # freq=492778
+TermDateTimeSort: lastmodndvsort//part # freq=588644
+TermDateTimeSort: lastmodndvsort//st # freq=306811
+
+TermDateTimeSort: lastmodndvsort//0 # freq=708472
+TermDateTimeSort: lastmodndvsort//names # freq=402762
+TermDateTimeSort: lastmodndvsort//nbsp # freq=492778
+TermDateTimeSort: lastmodndvsort//part # freq=588644
+TermDateTimeSort: lastmodndvsort//st # freq=306811
+
+TermDateTimeDescSort: lastmodndvsortdesc//0 # freq=708472
+TermDateTimeDescSort: lastmodndvsortdesc//names # freq=402762
+TermDateTimeDescSort: lastmodndvsortdesc//nbsp # freq=492778
+TermDateTimeDescSort: lastmodndvsortdesc//part # freq=588644
+TermDateTimeDescSort: lastmodndvsortdesc//st # freq=306811
+
+MatchAllDateTimeSort: lastmodndvsort//*:*
+
+MatchAllDateTimeDescSort: lastmodndvsortdesc//*:*

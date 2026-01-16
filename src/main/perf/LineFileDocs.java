@@ -691,10 +691,8 @@ public class LineFileDocs implements Closeable {
 
       int spot5 = line.indexOf(SEP, 1 + spot4);
       if (spot5 == -1) {
-          ordinal = line.substring(spot3 + 1, spot4);
-          randomLabel = null;
+          randomLabel = "null";
       } else {
-          ordinal = line.substring(spot4 + 1, spot5);
           randomLabel = line.substring(spot3 + 1, spot4);
       }
 
@@ -722,7 +720,7 @@ public class LineFileDocs implements Closeable {
       } else if (doc.byteVectorField != null) {
         doc.byteVectorField.setVectorValue((byte[]) lfd.vector.array());
       }
-      doc.ordinal.setLongValue(Integer.parseInt(ordinal));
+      doc.ordinal.setLongValue(Integer.parseInt(ordinal.strip()));
     }
 
     if (myID == -1) {

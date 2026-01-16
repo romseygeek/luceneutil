@@ -447,7 +447,7 @@ def parseResults(resultsFiles):
       # nocommit -- why would we pass this file in, if it does not exist?
       continue
 
-    if os.path.exists(resultsFile + ".stdout") and os.path.getsize(resultsFile + ".stdout") > 50 * 1024:
+    if os.path.exists(resultsFile + ".stdout") and os.path.getsize(resultsFile + ".stdout") > 500 * 1024:
       raise RuntimeError("%s.stdout is %d bytes; leftover System.out.println?" % (resultsFile, os.path.getsize(resultsFile + ".stdout")))
 
     tasksWindownMS = -1
@@ -522,6 +522,10 @@ def parseResults(resultsFiles):
             task.sort = "DayOfYear"
           elif sort == '<string_val: "titleBDV">':
             task.sort = "TitleBinary"
+          elif sort.startswith('<sortednumeric: "ordinal">!'):
+            task.sort = "OrdinalDesc"
+          elif sort.startswith('<sortednumeric: "ordinal">'):
+            task.sort = "Ordinal"
           elif sort != "null":
             raise RuntimeError("could not parse sort: %s" % sort)
           else:
